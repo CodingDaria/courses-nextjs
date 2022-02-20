@@ -1,10 +1,10 @@
-import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
 import cn from 'classnames';
 
 import styles from './Tag.module.css';
 
 interface ITagProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  children: React.ReactNode;
+  children: ReactNode;
   size?: 'S' | 'M';
   color?: 'ghost' | 'red' | 'light' | 'green' | 'primary';
   href?: string;
