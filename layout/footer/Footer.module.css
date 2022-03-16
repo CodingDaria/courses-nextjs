@@ -1,0 +1,55 @@
+.wrapper {
+	display: grid;
+
+	padding: 1rem 2rem;
+
+	color: var(--white);
+	background-color: var(--primary);
+	gap: 40px;
+	grid-template-columns: 1fr auto auto;
+	grid-template-areas: "year terms privacy";
+
+	font-size: 16px;
+	line-height: 21.79px;
+}
+
+.year {
+	grid-area: year;
+}
+
+.terms {
+	grid-area: terms;
+
+	text-align: right;
+}
+
+.privacy {
+	grid-area: privacy;
+
+	text-align: right;
+}
+
+.year,
+.terms,
+.privacy {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+@media (max-width: 760px) {
+	.wrapper {
+		padding: 1.5rem 2rem;
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"year"
+			"terms"
+			"privacy";
+		row-gap: 20px;
+	}
+
+	.year,
+	.terms,
+	.privacy {
+		text-align: left;
+	}
+}
