@@ -1,4 +1,5 @@
 import { FunctionComponent, ReactNode } from 'react';
+import { AppContextProvider, IAppContext } from '../context/app.context';
 
 import styles from './Layout.module.css';
 
@@ -22,10 +23,12 @@ const Layout = ({ children }: ILayoutProps) => {
 };
 
 export const withLayout =
-  <T extends Record<string, unknown>>(Component: FunctionComponent<T>) =>
+  <T extends Record<string, unknown> & IAppContext>(Component: FunctionComponent<T>) =>
   (props: T) =>
     (
-      <Layout>
-        <Component {...props} />
-      </Layout>
+      <AppContextProvider menu={props.menu} firstCategory={props.firstCategory}>
+        <Layout>
+          <Component {...props} />
+        </Layout>
+      </AppContextProvider>
     );
