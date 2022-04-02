@@ -1,15 +1,73 @@
-.menu {}
+.menu {
+	padding-bottom: 20px;
+}
 
-.firstLevel {}
+.firstLevel {
+	display: grid;
+	align-items: center;
 
-.firstLevelActive {}
+	margin-top: 20px;
 
-.secondLevel {}
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 25px;
+	grid-template-columns: 24px 1fr;
+	gap: 20px;
+}
 
-.secondLevelBlock {}
+.firstLevelActive,
+.firstLevel:hover {
+	color: var(--primary);
+}
 
-.secondLevelBlockOpened {}
+.firstLevelActive svg,
+.firstLevel:hover svg {
+	fill: var(--primary);
+}
 
-.thirdLevel {}
+.secondBlock {
+	margin-top: 14px;
+	margin-left: 12px;
+	padding-top: 10px;
+	padding-left: 32px;
 
-.thirdLevelActive {}
+	border-left: 1px solid #DFDFDF;
+}
+
+.secondLevel {
+	margin-bottom: 10px;
+
+	cursor: pointer;
+	text-transform: uppercase;
+
+	color: var(--gray-dark);
+
+	font-size: 12px;
+	font-weight: 300;
+	line-height: 16px;
+}
+
+.secondLevelBlock {
+
+}
+
+.secondLevelBlockOpened:last-child {
+	margin-bottom: 20px;
+}
+
+.thirdLevel {
+	display: block;
+
+	margin-bottom: 10px;
+
+	color: var(--gray-dark);
+
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 19px;
+}
+
+.thirdLevel:hover,
+.thirdLevelActive {
+	color: var(--primary);
+}
