@@ -3,14 +3,17 @@ import axios from 'axios';
 import { ParsedUrlQuery } from 'querystring';
 
 import { withLayout } from '../../layout';
+import TopPageComponent from '../../components/TopPageComponent';
 import { MenuItem } from '../interfaces/menu.interface';
 import { PageModel, TopLevelCategory } from '../../interfaces/page.interface';
 import { ProductModel } from '../../interfaces/product.interface';
 import { firstLevelMenu } from '../../helpers';
 
-function Course({ products }: CourseProps): JSX.Element {
-  return <>{products && products.map((product) => <div key={product._id}>{product.title}</div>)}</>;
+function Course({ products, menu, firstCategory }: CourseProps): JSX.Element {
+  return <TopPageComponent products={products} menu={menu} firstCategory={firstCategory} />;
 }
+
+// {products && products.map((product) => <div key={product._id}>{product.title}</div>)}
 
 export default withLayout(Course);
 
