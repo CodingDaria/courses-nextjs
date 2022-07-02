@@ -9,11 +9,9 @@ import { PageModel, TopLevelCategory } from '../../interfaces/page.interface';
 import { ProductModel } from '../../interfaces/product.interface';
 import { firstLevelMenu } from '../../helpers';
 
-function Course({ products, menu, firstCategory }: CourseProps): JSX.Element {
-  return <TopPageComponent products={products} menu={menu} firstCategory={firstCategory} />;
+function Course({ page, products, menu, firstCategory }: CourseProps): JSX.Element {
+  return <TopPageComponent page={page} products={products} menu={menu} firstCategory={firstCategory} />;
 }
-
-// {products && products.map((product) => <div key={product._id}>{product.title}</div>)}
 
 export default withLayout(Course);
 
@@ -82,7 +80,7 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({
 
 interface CourseProps extends Record<string, unknown> {
   menu: MenuItem[];
-  page: PageModel[];
+  page: PageModel;
   products: ProductModel[];
   firstCategory: TopLevelCategory;
 }

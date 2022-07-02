@@ -42,7 +42,7 @@ const Menu = () => {
   const buildSecondLevel = (menuItem: FirstLevelMenuItem) => {
     return (
       <div className={styles.secondBlock}>
-        {menu.map((item) => {
+        {menu?.map((item) => {
           if (item.pages.map((p) => p.alias).includes(router.asPath.split('/')[2])) {
             item.isOpened = true;
           }
