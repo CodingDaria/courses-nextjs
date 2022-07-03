@@ -5,3 +5,4 @@ export * from './Tag';
 export * from './Rating';
 export * from './Card';
 export * from './HhData';
+export * from './Advantages';

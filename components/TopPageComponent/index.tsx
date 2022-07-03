@@ -1,10 +1,9 @@
 import React from 'react';
-import cn from 'classnames';
 
 import styles from './TopPage.module.css';
 import { PageModel, TopLevelCategory } from '../../interfaces/page.interface';
 import { ProductModel } from '../../interfaces/product.interface';
-import { HTag, Tag, HhData } from '..';
+import { HTag, Tag, HhData, Advantages } from '..';
 
 interface TopPageProps extends Record<string, unknown> {
   page: PageModel;
@@ -31,7 +30,20 @@ const TopPageComponent = ({ page, products, firstCategory }: TopPageProps): JSX.
           hh.ru
         </Tag>
       </div>
-      {firstCategory === TopLevelCategory.Courses && <HhData {...page.hh} />}
+      {firstCategory === TopLevelCategory.Courses && Boolean(page.hh) && <HhData {...page.hh} />}
+      {page.advantages && page.advantages.length > 0 && (
+        <>
+          <HTag tag="h2">Advantages</HTag>
+          <Advantages advantages={page.advantages} />
+        </>
+      )}
+      {page.seoText && <div className={styles.seo} dangerouslySetInnerHTML={{ __html: page.seoText }} />}
+      <HTag tag="h2">Skills</HTag>
+      {page.tags.map((tag) => (
+        <Tag key={tag} color="primary">
+          {tag}
+        </Tag>
+      ))}
     </div>
   );
 };

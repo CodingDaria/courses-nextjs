@@ -13,19 +13,22 @@ const Menu = () => {
   const router = useRouter();
 
   const openSecondLevel = (secondCategory: string) => {
-    setMenu && setMenu(menu.map((m) => {
-      if (m._id.secondCategory === secondCategory) {
-        m.isOpened = !m.isOpened;
-      }
-      return m;
-    }));
-  }
+    setMenu &&
+      setMenu(
+        menu.map((m) => {
+          if (m._id.secondCategory === secondCategory) {
+            m.isOpened = !m.isOpened;
+          }
+          return m;
+        })
+      );
+  };
 
   const buildThirdLevel = (pages: PageItem[], route: string) => {
     return (
       <>
         {pages.map((page) => (
-          <Link href={`/${route}/${page.alias}`}>
+          <Link href={`/${route}/${page.alias}`} key={page.category}>
             <a
               className={cn(styles.thirdLevel, {
                 [styles.thirdLevelActive]: `/${route}/${page.alias}` === router.asPath,
@@ -48,7 +51,9 @@ const Menu = () => {
           }
           return (
             <div key={item._id.secondCategory}>
-              <div className={styles.secondLevel} onClick={() => openSecondLevel(item._id.secondCategory)}>{item._id.secondCategory}</div>
+              <div className={styles.secondLevel} onClick={() => openSecondLevel(item._id.secondCategory)}>
+                {item._id.secondCategory}
+              </div>
               <div
                 className={cn(styles.secondLevelBlock, {
                   [styles.secondLevelBlockOpened]: item.isOpened,
