@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { GetStaticProps } from 'next';
 import axios from 'axios';
 
-import { HTag, Button, P, Tag, Rating } from '../components';
+import { HTag, Button, P, Tag, Rating, Input, Textarea } from '../components';
 import { withLayout } from '../layout';
 import { MenuItem } from '../interfaces/menu.interface';
 
@@ -20,6 +20,7 @@ function Home({ menu }: HomeProps): JSX.Element {
       </Button>
       <P size="S">Paragraph</P>
       <P>Paragraph</P>
+      <Textarea placeholder="textarea" />
       <P size="L">Paragraph</P>
       <Tag size="S" color="ghost">
         Tag
@@ -33,9 +34,7 @@ function Home({ menu }: HomeProps): JSX.Element {
       <Tag size="S" color="green">
         Tag
       </Tag>
-      <Tag size="S" color="primary">
-        Tag
-      </Tag>
+      <Input placeholder="test" />
       <Rating rating={rating} setRating={setRating} isEditable />
       {JSON.stringify(menu)}
     </>
