@@ -3,7 +3,7 @@ import React, { useReducer } from 'react';
 import styles from './TopPage.module.css';
 import { PageModel, TopLevelCategory } from '../../interfaces/page.interface';
 import { ProductModel } from '../../interfaces/product.interface';
-import { HTag, Tag, HhData, Advantages, Sort } from '..';
+import { HTag, Tag, HhData, Advantages, Sort, Product } from '..';
 import { SortEnum } from '../Sort';
 import { SortReducer } from './sort.reducer';
 
@@ -34,7 +34,7 @@ const TopPageComponent = ({ page, products, firstCategory }: TopPageProps): JSX.
         )}
         <Sort sort={currentSort} setSort={setSort} />
       </div>
-      <div>{sortedProducts && sortedProducts.map((product) => <div key={product._id}>{product.title}</div>)}</div>
+      <div>{sortedProducts && sortedProducts.map((product) => <Product key={product._id} product={product} />)}</div>
       <div className={styles.hhTitle}>
         <HTag tag="h2">Vacancies - {page?.category}</HTag>
         <Tag color="red" size="M">

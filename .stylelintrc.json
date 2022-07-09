@@ -10,6 +10,7 @@
       {
         "ignoreShorthands": ["/grid/"]
       }
-    ]
+    ],
+    "max-line-length": null
   }
 }
