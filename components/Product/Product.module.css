@@ -107,6 +107,33 @@
 	line-height: 24px;
 }
 
+.characteristics {
+	display: grid;
+
+	padding-right: 60px;
+	grid-template-columns: auto 1fr auto;
+	gap: 10px;
+
+	font-size: 16px;
+	line-height: 32px;
+}
+
+.characteristicsName {
+	align-items: baseline;
+
+	font-weight: 700;
+}
+
+.characteristicsValue {
+	align-items: baseline;
+}
+
+.characteristicsDots {
+	margin-bottom: 5px;
+
+	border-bottom: 1px dashed var(--grey);
+}
+
 .advTitle {
 	margin-bottom: 5px;
 

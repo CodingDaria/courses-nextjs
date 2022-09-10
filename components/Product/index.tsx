@@ -4,7 +4,7 @@ import cn from 'classnames';
 import styles from './Product.module.css';
 import { ProductModel } from '../../interfaces/product.interface';
 import { Card, Rating, Tag, Button, Divider } from '..';
-import { ruPrice } from '../../helpers';
+import { ruPrice, declOfNum } from '../../helpers';
 
 interface ProductProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   product: ProductModel;
@@ -40,10 +40,20 @@ export const Product = ({ product, className, ...props }: ProductProps): JSX.Ele
       </div>
       <div className={styles.priceTitle}>price</div>
       <div className={styles.creditTitle}>credit</div>
-      <div className={styles.rateTitle}>{product.reviewCount} reviews</div>
+      <div className={styles.rateTitle}>
+        {product.reviewCount} {declOfNum(product.reviewCount, ['review', 'reviews'])}
+      </div>
       <Divider className={styles.hr} />
       <div className={styles.description}>{product.description}</div>
-      <div className={styles.features}>features</div>
+      <div className={styles.features}>
+        {product.characteristics.map((ch) => (
+          <div key={ch.name} className={styles.characteristics}>
+            <span className={styles.characteristicsName}>{ch.name}</span>
+            <span className={styles.characteristicsDots}></span>
+            <span className={styles.characteristicsValue}>{ch.value}</span>
+          </div>
+        ))}
+      </div>
       <div className={styles.advBlock}>
         {product.advantages ? (
           <div className={styles.advantages}>
