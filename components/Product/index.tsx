@@ -3,7 +3,8 @@ import cn from 'classnames';
 
 import styles from './Product.module.css';
 import { ProductModel } from '../../interfaces/product.interface';
-import { Card, Rating, Tag, Button } from '..';
+import { Card, Rating, Tag, Button, Divider } from '..';
+import { ruPrice } from '../../helpers';
 
 interface ProductProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   product: ProductModel;
@@ -16,14 +17,23 @@ export const Product = ({ product, className, ...props }: ProductProps): JSX.Ele
         <img src={`${process.env.NEXT_PUBLIC_DOMAIN}${product.image}`} alt={product.title} />
       </div>
       <div className={styles.title}>{product.title}</div>
-      <div className={styles.price}>{product.price}</div>
-      <div className={styles.credit}>{product.credit}</div>
+      <div className={styles.price}>
+        {ruPrice(product.price)}
+        {product.oldPrice ? (
+          <Tag className={styles.oldPrice} color="green">
+            {ruPrice(product.price - product.oldPrice)}
+          </Tag>
+        ) : null}
+      </div>
+      <div className={styles.credit}>
+        {ruPrice(product.credit)}/<span className={styles.month}>mo</span>
+      </div>
       <div className={styles.rating}>
         <Rating rating={product.reviewAvg ?? product.initialRating} />
       </div>
       <div className={styles.tags}>
         {product.categories.map((category) => (
-          <Tag key={category} color="ghost">
+          <Tag key={category} className={styles.category} color="ghost">
             {category}
           </Tag>
         ))}
@@ -31,27 +41,27 @@ export const Product = ({ product, className, ...props }: ProductProps): JSX.Ele
       <div className={styles.priceTitle}>price</div>
       <div className={styles.creditTitle}>credit</div>
       <div className={styles.rateTitle}>{product.reviewCount} reviews</div>
-      <div className={styles.hr}>
-        <hr />
-      </div>
+      <Divider className={styles.hr} />
       <div className={styles.description}>{product.description}</div>
       <div className={styles.features}>features</div>
-      <div className={styles.advantages}>
-        <div className={styles.advBlock}>
-          <div>Advantages</div>
-          <div>{product.advantages}</div>
-        </div>
-        <div className={styles.disadvantages}>
-          <div>Disadvantages</div>
-          <div>{product.disadvantages}</div>
-        </div>
+      <div className={styles.advBlock}>
+        {product.advantages ? (
+          <div className={styles.advantages}>
+            <div className={styles.advTitle}>Advantages</div>
+            <div>{product.advantages}</div>
+          </div>
+        ) : null}
+        {product.disadvantages ? (
+          <div className={styles.disadvantages}>
+            <div className={styles.advTitle}>Disadvantages</div>
+            <div>{product.disadvantages}</div>
+          </div>
+        ) : null}
       </div>
-      <div className={styles.hr}>
-        <hr />
-      </div>
+      <Divider className={styles.hr} />
       <div className={styles.actions}>
         <Button appearance="primary">More</Button>
-        <Button appearance="ghost" arrow="right">
+        <Button className={styles.reviewButton} appearance="ghost" arrow="right">
           Reviews
         </Button>
       </div>
