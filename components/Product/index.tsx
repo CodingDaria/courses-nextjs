@@ -1,4 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import Image from 'next/image';
 import cn from 'classnames';
 
 import styles from './Product.module.css';
@@ -14,7 +15,12 @@ export const Product = ({ product, className, ...props }: ProductProps): JSX.Ele
   return (
     <Card className={cn(className, styles.product)} {...props}>
       <div className={styles.logo}>
-        <img src={`${process.env.NEXT_PUBLIC_DOMAIN}${product.image}`} alt={product.title} />
+        <Image
+          src={`${process.env.NEXT_PUBLIC_DOMAIN}${product.image}`}
+          alt={product.title}
+          width={70}
+          height={70}
+        />
       </div>
       <div className={styles.title}>{product.title}</div>
       <div className={styles.price}>
