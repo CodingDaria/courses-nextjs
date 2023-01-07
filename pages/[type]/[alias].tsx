@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
+import Head from 'next/head';
 import axios from 'axios';
 import { ParsedUrlQuery } from 'querystring';
 
@@ -10,7 +11,18 @@ import { ProductModel } from '../../interfaces/product.interface';
 import { firstLevelMenu } from '../../helpers';
 
 function Course({ page, products, menu, firstCategory }: CourseProps): JSX.Element {
-  return <TopPageComponent page={page} products={products} menu={menu} firstCategory={firstCategory} />;
+  return (
+    <>
+      <Head>
+        <title>{page.metaTitle}</title>
+        <meta name="description" content={page.metaDescription} />
+        <meta property="og:title" content={page.metaTitle} />
+        <meta property="og:description" content={page.metaDescription} />
+        <meta property="og:type" content="article" />
+      </Head>
+      <TopPageComponent page={page} products={products} menu={menu} firstCategory={firstCategory} />
+    </>
+  );
 }
 
 export default withLayout(Course);
