@@ -5,7 +5,7 @@ import styles from './Card.module.css';
 
 interface CardProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   children: React.ReactNode;
-  color: 'white' | 'blue';
+  color?: 'white' | 'blue';
 }
 
 export const Card = ({ children, color = 'white', className, ...props }: CardProps): JSX.Element => {

@@ -26,7 +26,7 @@ export interface ProductModel {
   createdAt: Date;
   updatedAt: Date;
   image: string;
-  initialRating: string;
+  initialRating: number;
   reviews: ProductReview[];
   reviewCount: number;
   reviewAvg?: number;

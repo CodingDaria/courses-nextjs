@@ -1,5 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
-import Image from 'next/image';
+// import Image from 'next/image';
 import cn from 'classnames';
 
 import styles from './Product.module.css';
@@ -11,11 +11,11 @@ interface ProductProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>,
   product: ProductModel;
 }
 
-export const Product = ({ product, className, ...props }: ProductProps): JSX.Element => {
+export const Product = ({ product, className }: ProductProps): JSX.Element => {
   return (
-    <Card className={cn(className, styles.product)} {...props}>
+    <Card className={cn(className, styles.product)}>
       <div className={styles.logo}>
-        <Image
+        <img
           src={`${process.env.NEXT_PUBLIC_DOMAIN}${product.image}`}
           alt={product.title}
           width={70}

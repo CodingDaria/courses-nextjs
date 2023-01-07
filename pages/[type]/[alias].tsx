@@ -5,13 +5,13 @@ import { ParsedUrlQuery } from 'querystring';
 
 import { withLayout } from '../../layout';
 import TopPageComponent from '../../components/TopPageComponent';
-import { MenuItem } from '../interfaces/menu.interface';
+import { MenuItem } from '../../interfaces/menu.interface';
 import { PageModel, TopLevelCategory } from '../../interfaces/page.interface';
 import { ProductModel } from '../../interfaces/product.interface';
 import { firstLevelMenu } from '../../helpers';
 
 function Course({ page, products, menu, firstCategory }: CourseProps): JSX.Element {
-  return (
+  return page && products ? (
     <>
       <Head>
         <title>{page.metaTitle}</title>
@@ -22,13 +22,13 @@ function Course({ page, products, menu, firstCategory }: CourseProps): JSX.Eleme
       </Head>
       <TopPageComponent page={page} products={products} menu={menu} firstCategory={firstCategory} />
     </>
-  );
+  ) : <></>;
 }
 
 export default withLayout(Course);
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  let paths: string[] = [];
+  let paths: any[] = [];
   firstLevelMenu.forEach(async (m) => {
     const { data: menu } = await axios.post<MenuItem[]>(`${process.env.NEXT_PUBLIC_DOMAIN}/api/top-page/find`, {
       firstCategory: m.id,

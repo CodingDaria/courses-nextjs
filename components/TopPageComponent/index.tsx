@@ -3,7 +3,7 @@ import React, { useReducer } from 'react';
 import styles from './TopPage.module.css';
 import { PageModel, TopLevelCategory } from '../../interfaces/page.interface';
 import { ProductModel } from '../../interfaces/product.interface';
-import { HTag, Tag, HhData, Advantages, Sort, Product } from '..';
+import { HTag, Tag, HeadHuntData, Advantages, Sort, Product } from '..';
 import { SortEnum } from '../Sort';
 import { SortReducer } from './sort.reducer';
 
@@ -41,7 +41,7 @@ const TopPageComponent = ({ page, products, firstCategory }: TopPageProps): JSX.
           hh.ru
         </Tag>
       </div>
-      {firstCategory === TopLevelCategory.Courses && Boolean(page.hh) && <HhData {...page.hh} />}
+      {firstCategory === TopLevelCategory.Courses && Boolean(page.hh) && <HeadHuntData {...page.hh!} />}
       {page.advantages && page.advantages.length > 0 && (
         <>
           <HTag tag="h2">Advantages</HTag>

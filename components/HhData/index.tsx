@@ -6,7 +6,7 @@ import RateIcon from './rate.svg';
 
 interface HhDataProps extends HhData {}
 
-export const HhData = ({ count, juniorSalary, middleSalary, seniorSalary }: HhDataProps) => {
+export const HeadHuntData = ({ count, juniorSalary, middleSalary, seniorSalary }: HhDataProps) => {
   return (
     <div className={styles.hh}>
       <Card color="blue" className={styles.card}>
