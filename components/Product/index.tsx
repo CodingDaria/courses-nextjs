@@ -1,10 +1,10 @@
-import { DetailedHTMLProps, HTMLAttributes, useState } from 'react';
+import { DetailedHTMLProps, Fragment, HTMLAttributes, useState } from 'react';
 // import Image from 'next/image';
 import cn from 'classnames';
 
 import styles from './Product.module.css';
 import { ProductModel } from '../../interfaces/product.interface';
-import { Card, Rating, Tag, Button, Divider, Review } from '..';
+import { Card, Rating, Tag, Button, Divider, Review, ReviewForm } from '..';
 import { ruPrice, declOfNum } from '../../helpers';
 
 interface ProductProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
@@ -93,8 +93,12 @@ export const Product = ({ product, className }: ProductProps): JSX.Element => {
         })}
       >
         {product.reviews.map((review) => (
-          <Review key={review._id} review={review} />
+          <Fragment key={review._id}>
+            <Review review={review} />
+            <Divider />
+          </Fragment>
         ))}
+        <ReviewForm productId={product._id} />
       </Card>
     </>
   );
