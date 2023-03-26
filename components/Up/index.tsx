@@ -3,7 +3,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { useScrollY } from '../../hooks';
 
 import styles from './Up.module.css';
-import UpIcon from './Up.svg';
+import { ButtonIcon } from '../ButtonIcon';
 
 export const Up = (): JSX.Element => {
   const controls = useAnimation();
@@ -18,14 +18,8 @@ export const Up = (): JSX.Element => {
   };
 
   return (
-    <motion.button
-      type="button"
-      className={styles.up}
-      onClick={scrollToTop}
-      initial={{ opacity: 0 }}
-      animate={controls}
-    >
-      <UpIcon />
-    </motion.button>
+    <motion.div className={styles.up} initial={{ opacity: 0 }} animate={controls}>
+      <ButtonIcon appearance="primary" icon="up" onClick={scrollToTop} />
+    </motion.div>
   );
 };
