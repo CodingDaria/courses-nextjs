@@ -5,6 +5,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { firstLevelMenu } from '../../helpers';
 import { MenuItem } from '../../interfaces/menu.interface';
 import { withLayout } from '../../layout';
+import { API } from '../../helpers/api';
 
 function Courses({ firstCategory }: HomeProps): JSX.Element {
   return <div>Courses index page {firstCategory}</div>;
@@ -36,7 +37,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({
   }
 
   try {
-    const { data: menu } = await axios.post<MenuItem[]>(`${process.env.NEXT_PUBLIC_DOMAIN}/api/top-page/find`, {
+    const { data: menu } = await axios.post<MenuItem[]>(API.topPage.find, {
       firstCategory: firstCategoryItem.id,
     });
 

@@ -9,6 +9,7 @@ import { MenuItem } from '../../interfaces/menu.interface';
 import { PageModel, TopLevelCategory } from '../../interfaces/page.interface';
 import { ProductModel } from '../../interfaces/product.interface';
 import { firstLevelMenu } from '../../helpers';
+import { API } from '../../helpers/api';
 
 function Course({ page, products, menu, firstCategory }: CourseProps): JSX.Element {
   return page && products ? (
@@ -22,7 +23,9 @@ function Course({ page, products, menu, firstCategory }: CourseProps): JSX.Eleme
       </Head>
       <TopPageComponent page={page} products={products} menu={menu} firstCategory={firstCategory} />
     </>
-  ) : <></>;
+  ) : (
+    <></>
+  );
 }
 
 export default withLayout(Course);
@@ -30,7 +33,7 @@ export default withLayout(Course);
 export const getStaticPaths: GetStaticPaths = async () => {
   let paths: any[] = [];
   firstLevelMenu.forEach(async (m) => {
-    const { data: menu } = await axios.post<MenuItem[]>(`${process.env.NEXT_PUBLIC_DOMAIN}/api/top-page/find`, {
+    const { data: menu } = await axios.post<MenuItem[]>(API.topPage.find, {
       firstCategory: m.id,
     });
     paths = [...paths, menu.flatMap((item) => item.pages.map((page) => `/${m.route}/${page.alias}`))];
@@ -59,7 +62,7 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({
   }
 
   try {
-    const { data: menu } = await axios.post<MenuItem[]>(`${process.env.NEXT_PUBLIC_DOMAIN}/api/top-page/find`, {
+    const { data: menu } = await axios.post<MenuItem[]>(API.topPage.find, {
       firstCategory: firstCategoryItem.id,
     });
     if (!menu?.length) {
@@ -67,10 +70,9 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({
         notFound: true,
       };
     }
-    const { data: page } = await axios.get<PageModel>(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/api/top-page/byAlias/${params.alias}`
-    );
-    const { data: products } = await axios.post<ProductModel[]>(`${process.env.NEXT_PUBLIC_DOMAIN}/api/product/find`, {
+
+    const { data: page } = await axios.get<PageModel>(API.topPage.byAlias + params.alias);
+    const { data: products } = await axios.post<ProductModel[]>(API.product.find, {
       category: page.category,
       limit: 10,
     });
