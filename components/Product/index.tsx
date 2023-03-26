@@ -22,6 +22,11 @@ export const Product = motion(
       reviewRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
+    const variants = {
+      visible: { opacity: 1, height: 'auto' },
+      hidden: { opacity: 0, height: 0 },
+    };
+
     return (
       <div className={className} ref={ref} {...props}>
         <Card className={styles.product}>
@@ -95,22 +100,17 @@ export const Product = motion(
             </Button>
           </div>
         </Card>
-        <Card
-          color="blue"
-          className={cn(styles.reviews, {
-            [styles.opened]: isReviewOpened,
-            [styles.closed]: !isReviewOpened,
-          })}
-          ref={reviewRef}
-        >
-          {product.reviews.map((review) => (
-            <Fragment key={review._id}>
-              <Review review={review} />
-              <Divider />
-            </Fragment>
-          ))}
-          <ReviewForm productId={product._id} />
-        </Card>
+        <motion.div layout variants={variants} initial="hidden" animate={isReviewOpened ? 'visible' : 'hidden'}>
+          <Card color="blue" className={styles.reviews} ref={reviewRef}>
+            {product.reviews.map((review) => (
+              <Fragment key={review._id}>
+                <Review review={review} />
+                <Divider />
+              </Fragment>
+            ))}
+            <ReviewForm productId={product._id} />
+          </Card>
+        </motion.div>
       </div>
     );
   })
