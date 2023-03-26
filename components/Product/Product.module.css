@@ -179,8 +179,8 @@
 	padding: 30px;
 }
 
-.reviews {
-	/* margin-top: -30px; */
+.rateTitle a {
+	color: var(--primary);
 }
 
 @media screen and (max-width: 1320px) {

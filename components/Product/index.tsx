@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, Fragment, HTMLAttributes, useState } from 'react';
+import { DetailedHTMLProps, Fragment, HTMLAttributes, useRef, useState } from 'react';
 // import Image from 'next/image';
 import cn from 'classnames';
 
@@ -11,12 +11,18 @@ interface ProductProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>,
   product: ProductModel;
 }
 
-export const Product = ({ product, className }: ProductProps): JSX.Element => {
+export const Product = ({ product, className, ...props }: ProductProps): JSX.Element => {
   const [isReviewOpened, setReviewOpened] = useState(false);
+  const reviewRef = useRef<HTMLDivElement>(null);
+
+  const scrollToReview = () => {
+    setReviewOpened(true);
+    reviewRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   return (
-    <>
-      <Card className={cn(className, styles.product)}>
+    <div className={className} {...props}>
+      <Card className={styles.product}>
         <div className={styles.logo}>
           <img src={`${process.env.NEXT_PUBLIC_DOMAIN}${product.image}`} alt={product.title} width={70} height={70} />
         </div>
@@ -45,7 +51,9 @@ export const Product = ({ product, className }: ProductProps): JSX.Element => {
         <div className={styles.priceTitle}>price</div>
         <div className={styles.creditTitle}>credit</div>
         <div className={styles.rateTitle}>
-          {product.reviewCount} {declOfNum(product.reviewCount, ['review', 'reviews'])}
+          <a href="#ref" onClick={scrollToReview}>
+            {product.reviewCount} {declOfNum(product.reviewCount, ['review', 'reviews'])}
+          </a>
         </div>
         <Divider className={styles.hr} />
         <div className={styles.description}>{product.description}</div>
@@ -91,6 +99,7 @@ export const Product = ({ product, className }: ProductProps): JSX.Element => {
           [styles.opened]: isReviewOpened,
           [styles.closed]: !isReviewOpened,
         })}
+        ref={reviewRef}
       >
         {product.reviews.map((review) => (
           <Fragment key={review._id}>
@@ -100,6 +109,6 @@ export const Product = ({ product, className }: ProductProps): JSX.Element => {
         ))}
         <ReviewForm productId={product._id} />
       </Card>
-    </>
+    </div>
   );
 };
