@@ -6,6 +6,7 @@ import styles from './Layout.module.css';
 import { Sidebar } from './sidebar';
 import { Header } from './header';
 import { Footer } from './footer';
+import { Up } from '../components';
 
 interface ILayoutProps {
   children: ReactNode;
@@ -18,6 +19,7 @@ const Layout = ({ children }: ILayoutProps) => {
       <Sidebar className={styles.sidebar} />
       <div className={styles.body}>{children}</div>
       <Footer className={styles.footer} />
+      <Up />
     </div>
   );
 };

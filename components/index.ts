@@ -14,3 +14,4 @@ export * from './Product';
 export * from './Divider';
 export * from './Review';
 export * from './ReviewForm';
+export * from './Up';
