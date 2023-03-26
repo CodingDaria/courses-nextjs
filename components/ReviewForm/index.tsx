@@ -12,7 +12,12 @@ interface ReviewFormProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElemen
 }
 
 export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps): JSX.Element => {
-  const { register, control, handleSubmit } = useForm<IReviewForm>();
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IReviewForm>();
 
   const onSubmit = (data: IReviewForm) => {
     console.log('== data', data);
@@ -21,19 +26,40 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps):
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={cn(className, styles.reviewForm)} {...props}>
-        <Input {...register('name')} placeholder="Name" />
-        <Input {...register('title')} placeholder="Review title" className={styles.title} />
+        <Input
+          {...register('name', { required: { value: true, message: 'Enter the name' } })}
+          error={errors.name}
+          placeholder="Name"
+        />
+        <Input
+          {...register('title', { required: { value: true, message: 'Enter the title' } })}
+          error={errors.title}
+          placeholder="Review title"
+          className={styles.title}
+        />
         <div className={styles.rating}>
           <span>Rate:</span>
           <Controller
             control={control}
             name="rating"
+            rules={{ required: { value: true, message: 'Enter the rating' } }}
             render={({ field }) => (
-              <Rating ref={field.ref} rating={field.value} isEditable setRating={field.onChange} />
+              <Rating
+                ref={field.ref}
+                rating={field.value}
+                isEditable
+                setRating={field.onChange}
+                error={errors.rating}
+              />
             )}
           />
         </div>
-        <Textarea {...register('description')} placeholder="Review text" className={styles.description} />
+        <Textarea
+          {...register('description', { required: { value: true, message: 'Enter the description' } })}
+          error={errors.description}
+          placeholder="Review text"
+          className={styles.description}
+        />
         <div className={styles.submit}>
           <Button appearance="primary">Send</Button>
           <span className={styles.info}>* Will be moderated and reviewed before being published.</span>

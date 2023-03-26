@@ -1,5 +1,6 @@
 import { DetailedHTMLProps, ForwardedRef, forwardRef, HTMLAttributes, KeyboardEvent, useState } from 'react';
 import cn from 'classnames';
+import { FieldError } from 'react-hook-form';
 
 import styles from './Rating.module.css';
 import StarIcon from './Star.svg';
@@ -8,11 +9,12 @@ interface IRatingProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>,
   isEditable?: boolean;
   rating: number;
   setRating?: (rating: number) => void;
+  error?: FieldError;
 }
 
 export const Rating = forwardRef(
   (
-    { isEditable = false, rating, setRating, ...props }: IRatingProps,
+    { isEditable = false, rating, setRating, error, ...props }: IRatingProps,
     ref: ForwardedRef<HTMLDivElement>
   ): JSX.Element => {
     const [currentHoverRating, setCurrentHoverRating] = useState(rating);
@@ -31,7 +33,12 @@ export const Rating = forwardRef(
     };
 
     return (
-      <div {...props} ref={ref} onMouseLeave={() => changeRatingDisplay(rating)}>
+      <div
+        {...props}
+        className={cn(styles.wrapper, { [styles.error]: error })}
+        ref={ref}
+        onMouseLeave={() => changeRatingDisplay(rating)}
+      >
         {ratingArray.map((_, index: number) => {
           return (
             <StarIcon
@@ -49,6 +56,7 @@ export const Rating = forwardRef(
             />
           );
         })}
+        {error && <span className={styles.errorMessage}>{error.message}</span>}
       </div>
     );
   }
