@@ -28,7 +28,7 @@ const Menu = () => {
     return (
       <>
         {pages.map((page) => (
-          <Link href={`/${route}/${page.alias}`} key={page.category}>
+          <Link href={`/${route}/${page.alias}`} key={page._id}>
             <a
               className={cn(styles.thirdLevel, {
                 [styles.thirdLevelActive]: `/${route}/${page.alias}` === router.asPath,
