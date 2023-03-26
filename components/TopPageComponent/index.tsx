@@ -38,7 +38,9 @@ const TopPageComponent = ({ page, products, firstCategory }: TopPageProps): JSX.
         )}
         <Sort sort={currentSort} setSort={setSort} />
       </div>
-      <div>{sortedProducts && sortedProducts.map((product) => <Product key={product._id} product={product} />)}</div>
+      <div>
+        {sortedProducts && sortedProducts.map((product) => <Product key={product._id} layout product={product} />)}
+      </div>
       <div className={styles.hhTitle}>
         <HTag tag="h2">Vacancies - {page?.category}</HTag>
         <Tag color="red" size="M">
