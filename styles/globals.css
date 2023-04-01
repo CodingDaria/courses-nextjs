@@ -4,7 +4,7 @@ body {
 	padding: 0;
 
 	color: var(--black);
-	background: #F5F6F8;
+	background: var(--background);
 
 	font-family: var(--font-family);
 }
@@ -21,6 +21,7 @@ a {
 
 :root {
 	--black: #3B434E;
+	--background: #F5F6F8;
 	--gray: #EBEBEB;
 	--grey: #A4A4A4;
 	--gray-dark: #787D85;
