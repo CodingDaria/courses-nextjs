@@ -11,6 +11,24 @@
 		"footer footer footer footer";
 }
 
+.skipLink {
+	position: fixed;
+	top: 0;
+	left: 100px;
+
+	display: block;
+	overflow: hidden;
+
+	height: 0;
+
+	color: var(--white);
+	background: var(--primary);
+}
+
+.skipLink:focus {
+	height: auto;
+}
+
 .header {
 	grid-area: header;
 }
@@ -21,6 +39,8 @@
 
 .body {
 	grid-area: body;
+
+	outline: none;
 }
 
 .footer {
