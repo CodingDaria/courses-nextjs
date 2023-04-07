@@ -19,7 +19,10 @@ export const Product = motion(
 
     const scrollToReview = () => {
       setReviewOpened(true);
-      reviewRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => {
+        reviewRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        reviewRef.current?.focus();
+      }, 50);
     };
 
     const variants = {
@@ -101,14 +104,14 @@ export const Product = motion(
           </div>
         </Card>
         <motion.div layout variants={variants} initial="hidden" animate={isReviewOpened ? 'visible' : 'hidden'}>
-          <Card color="blue" className={styles.reviews} ref={reviewRef}>
+          <Card color="blue" className={styles.reviews} ref={reviewRef} tabIndex={isReviewOpened ? 0 : -1}>
             {product.reviews.map((review) => (
               <Fragment key={review._id}>
                 <Review review={review} />
                 <Divider />
               </Fragment>
             ))}
-            <ReviewForm productId={product._id} />
+            <ReviewForm productId={product._id} isOpened={isReviewOpened} />
           </Card>
         </motion.div>
       </div>

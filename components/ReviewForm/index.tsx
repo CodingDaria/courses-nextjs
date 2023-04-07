@@ -11,9 +11,10 @@ import { API } from '../../helpers/api';
 
 interface ReviewFormProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   productId: string;
+  isOpened: boolean;
 }
 
-export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps): JSX.Element => {
+export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewFormProps): JSX.Element => {
   const {
     register,
     control,
@@ -46,12 +47,14 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps):
           {...register('name', { required: { value: true, message: 'Enter the name' } })}
           error={errors.name}
           placeholder="Name"
+          tabIndex={isOpened ? 0 : -1}
         />
         <Input
           {...register('title', { required: { value: true, message: 'Enter the title' } })}
           error={errors.title}
           placeholder="Review title"
           className={styles.title}
+          tabIndex={isOpened ? 0 : -1}
         />
         <div className={styles.rating}>
           <span>Rate:</span>
@@ -66,6 +69,7 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps):
                 isEditable
                 setRating={field.onChange}
                 error={errors.rating}
+                tabIndex={isOpened ? 0 : -1}
               />
             )}
           />
@@ -75,9 +79,12 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps):
           error={errors.description}
           placeholder="Review text"
           className={styles.description}
+          tabIndex={isOpened ? 0 : -1}
         />
         <div className={styles.submit}>
-          <Button appearance="primary">Send</Button>
+          <Button appearance="primary" tabIndex={isOpened ? 0 : -1}>
+            Send
+          </Button>
           <span className={styles.info}>* Will be moderated and reviewed before being published.</span>
         </div>
       </div>
