@@ -24,10 +24,14 @@ const Layout = ({ children }: ILayoutProps) => {
 
   return (
     <div className={styles.wrapper}>
-      <a href="" className={styles.skipLink} tabIndex={1} onKeyDown={skipAction}>Go to content</a>
+      <a href="" className={styles.skipLink} tabIndex={1} onKeyDown={skipAction}>
+        Go to content
+      </a>
       <Header className={styles.header} />
       <Sidebar className={styles.sidebar} />
-      <div className={styles.body} ref={bodyRef} tabIndex={0}>{children}</div>
+      <main className={styles.body} ref={bodyRef} tabIndex={0} role="main">
+        {children}
+      </main>
       <Footer className={styles.footer} />
       <Up />
     </div>

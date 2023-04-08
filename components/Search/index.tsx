@@ -7,7 +7,7 @@ import { Input } from '../Input';
 import { Button } from '../Button';
 import SearchIcon from './Search.svg';
 
-interface SearchProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+interface SearchProps extends DetailedHTMLProps<HTMLAttributes<HTMLFormElement>, HTMLFormElement> {}
 
 export const Search = ({ className, ...props }: SearchProps): JSX.Element => {
   const [search, setSearch] = useState('');
@@ -18,7 +18,7 @@ export const Search = ({ className, ...props }: SearchProps): JSX.Element => {
   };
 
   return (
-    <div className={cn(className, styles.search)} {...props}>
+    <form className={cn(className, styles.search)} role="search" {...props}>
       <Input
         placeholder="Search..."
         className={styles.input}
@@ -33,6 +33,6 @@ export const Search = ({ className, ...props }: SearchProps): JSX.Element => {
       <Button appearance="primary" className={styles.button} onClick={handleSearch} aria-label="Search">
         <SearchIcon />
       </Button>
-    </div>
+    </form>
   );
 };
