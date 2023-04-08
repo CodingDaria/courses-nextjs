@@ -32,7 +32,7 @@ const TopPageComponent = ({ page, products, firstCategory }: TopPageProps): JSX.
       <div className={styles.title}>
         <HTag tag="h1">{page?.title}</HTag>
         {products && (
-          <Tag color="ghost" size="M">
+          <Tag color="ghost" size="M" aria-label={products.length + 'courses'}>
             {products.length}
           </Tag>
         )}

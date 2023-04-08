@@ -30,7 +30,7 @@ export const Search = ({ className, ...props }: SearchProps): JSX.Element => {
           }
         }}
       />
-      <Button appearance="primary" className={styles.button} onClick={handleSearch}>
+      <Button appearance="primary" className={styles.button} onClick={handleSearch} aria-label="Search">
         <SearchIcon />
       </Button>
     </div>

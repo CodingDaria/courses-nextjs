@@ -12,11 +12,17 @@ interface SortProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HT
 export const Sort = ({ sort, setSort, className, ...props }: SortProps): JSX.Element => {
   return (
     <div className={cn(className, styles.sort)} {...props}>
+      <div className={styles.sortName} id="sort">
+        Sorting
+      </div>
       <button
         onClick={() => setSort(SortEnum.Rating)}
         className={cn({
           [styles.active]: sort === SortEnum.Rating,
         })}
+        id="rating"
+        aria-selected={sort === SortEnum.Rating}
+        aria-labelledby="sort rating"
       >
         <SortIcon className={styles.sortIcon} /> By rating
       </button>
@@ -25,6 +31,9 @@ export const Sort = ({ sort, setSort, className, ...props }: SortProps): JSX.Ele
         className={cn({
           [styles.active]: sort === SortEnum.Price,
         })}
+        id="price"
+        aria-selected={sort === SortEnum.Price}
+        aria-labelledby="sort price"
       >
         <SortIcon className={styles.sortIcon} /> By price
       </button>

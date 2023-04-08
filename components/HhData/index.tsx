@@ -1,7 +1,7 @@
 import styles from './HhData.module.css';
 import { HhData } from '../../interfaces/page.interface';
 import { Card } from '..';
-import { ruPrice } from '../../helpers';
+import { formatPrice } from '../../helpers';
 import RateIcon from './rate.svg';
 
 interface HhDataProps extends HhData {}
@@ -16,7 +16,7 @@ export const HeadHuntData = ({ count, juniorSalary, middleSalary, seniorSalary }
       <Card color="blue" className={styles.salary}>
         <div>
           <div className={styles.title}>Beginner</div>
-          <div className={styles.salaryValue}>{ruPrice(juniorSalary)}</div>
+          <div className={styles.salaryValue}>{formatPrice(juniorSalary)}</div>
           <div className={styles.rate}>
             <RateIcon className={styles.filled} />
             <RateIcon />
@@ -25,7 +25,7 @@ export const HeadHuntData = ({ count, juniorSalary, middleSalary, seniorSalary }
         </div>
         <div>
           <div className={styles.title}>Middle</div>
-          <div className={styles.salaryValue}>{ruPrice(middleSalary)}</div>
+          <div className={styles.salaryValue}>{formatPrice(middleSalary)}</div>
           <div className={styles.rate}>
             <RateIcon className={styles.filled} />
             <RateIcon className={styles.filled} />
@@ -34,7 +34,7 @@ export const HeadHuntData = ({ count, juniorSalary, middleSalary, seniorSalary }
         </div>
         <div>
           <div className={styles.title}>Senior</div>
-          <div className={styles.salaryValue}>{ruPrice(seniorSalary)}</div>
+          <div className={styles.salaryValue}>{formatPrice(seniorSalary)}</div>
           <div className={styles.rate}>
             <RateIcon className={styles.filled} />
             <RateIcon className={styles.filled} />

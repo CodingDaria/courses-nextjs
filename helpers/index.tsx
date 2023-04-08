@@ -12,11 +12,11 @@ export const firstLevelMenu: FirstLevelMenuItem[] = [
   { route: 'products', name: 'Products', icon: <ProductsIcon />, id: TopLevelCategory.Products },
 ];
 
-export const ruPrice = (price: number) => {
+export const formatPrice = (price: number) => {
   return price
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-    .concat(' ₽');
+    .concat(' $');
 };
 
 export const declOfNum = (number: number, titles: [string, string]): string => {

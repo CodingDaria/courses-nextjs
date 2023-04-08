@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import styles from './Product.module.css';
 import { ProductModel } from '../../interfaces/product.interface';
 import { Card, Rating, Tag, Button, Divider, Review, ReviewForm } from '..';
-import { ruPrice, declOfNum } from '../../helpers';
+import { formatPrice, declOfNum } from '../../helpers';
 
 interface ProductProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   product: ProductModel;
@@ -38,17 +38,21 @@ export const Product = motion(
           </div>
           <div className={styles.title}>{product.title}</div>
           <div className={styles.price}>
-            {ruPrice(product.price)}
+            <span className="visuallyHidden">price</span>
+            {formatPrice(product.price)}
             {product.oldPrice ? (
               <Tag className={styles.oldPrice} color="green">
-                {ruPrice(product.price - product.oldPrice)}
+                <span className="visuallyHidden">discount</span>
+                {formatPrice(product.price - product.oldPrice)}
               </Tag>
             ) : null}
           </div>
           <div className={styles.credit}>
-            {ruPrice(product.credit)}/<span className={styles.month}>mo</span>
+            <span className="visuallyHidden">credit</span>
+            {formatPrice(product.credit)}/<span className={styles.month}>mo</span>
           </div>
           <div className={styles.rating}>
+            <span className="visuallyHidden">{`rating ${product.reviewAvg ?? product.initialRating}`}</span>
             <Rating rating={product.reviewAvg ?? product.initialRating} />
           </div>
           <div className={styles.tags}>
@@ -58,8 +62,12 @@ export const Product = motion(
               </Tag>
             ))}
           </div>
-          <div className={styles.priceTitle}>price</div>
-          <div className={styles.creditTitle}>credit</div>
+          <div className={styles.priceTitle} aria-hidden>
+            price
+          </div>
+          <div className={styles.creditTitle} aria-hidden>
+            credit
+          </div>
           <div className={styles.rateTitle}>
             <a href="#ref" onClick={scrollToReview}>
               {product.reviewCount} {declOfNum(product.reviewCount, ['review', 'reviews'])}
