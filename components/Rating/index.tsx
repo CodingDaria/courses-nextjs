@@ -42,14 +42,14 @@ export const Rating = forwardRef(
         changeRating(!rating ? 1 : rating + 1);
         setTimeout(() => {
           ratingArrayRef.current?.[rating]?.focus();
-        }, 40); 
+        }, 40);
       }
       if ((e.code === 'ArrowLeft' || e.code === 'ArrowDown') && rating >= 0) {
         e.preventDefault();
         changeRating(rating <= 1 ? 1 : rating - 1);
         setTimeout(() => {
           ratingArrayRef.current?.[rating - 2]?.focus();
-        }, 40); 
+        }, 40);
       }
       if (e.code === 'Space') {
         changeRating(index + 1);
@@ -80,7 +80,7 @@ export const Rating = forwardRef(
           return (
             <StarIcon
               key={index}
-              ref={r => ratingArrayRef.current?.[index] = r}
+              ref={(r) => (ratingArrayRef.current?.[index] = r)}
               className={cn(styles.star, {
                 [styles.filled]: index < currentHoverRating,
                 [styles.editable]: isEditable,
@@ -89,10 +89,20 @@ export const Rating = forwardRef(
               onClick={() => changeRating(index + 1)}
               tabIndex={getTabIndex(rating, index)}
               onKeyDown={(e: KeyboardEvent<SVGAElement>) => handleKeyDown(e, index)}
+              role={isEditable ? 'slider' : ''}
+              aria-valuenow={rating}
+              aria-valuemax={5}
+              aria-valuemin={1}
+              aria-label={isEditable ? 'Indicate rating' : `rating is ${rating}`}
+              aria-invalid={error}
             />
           );
         })}
-        {error && <span className={styles.errorMessage}>{error.message}</span>}
+        {error && (
+          <span role="alert" className={styles.errorMessage}>
+            {error.message}
+          </span>
+        )}
       </div>
     );
   }

@@ -21,6 +21,7 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
     handleSubmit,
     formState: { errors },
     reset,
+    clearErrors,
   } = useForm<IReviewForm>();
 
   const [isSuccess, setSuccess] = useState(false);
@@ -48,6 +49,7 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
           error={errors.name}
           placeholder="Name"
           tabIndex={isOpened ? 0 : -1}
+          aria-invalid={errors.name}
         />
         <Input
           {...register('title', { required: { value: true, message: 'Enter the title' } })}
@@ -55,6 +57,7 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
           placeholder="Review title"
           className={styles.title}
           tabIndex={isOpened ? 0 : -1}
+          aria-invalid={errors.title}
         />
         <div className={styles.rating}>
           <span>Rate:</span>
@@ -80,25 +83,31 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
           placeholder="Review text"
           className={styles.description}
           tabIndex={isOpened ? 0 : -1}
+          aria-label="Review text"
+          aria-invalid={errors.description}
         />
         <div className={styles.submit}>
-          <Button appearance="primary" tabIndex={isOpened ? 0 : -1}>
+          <Button appearance="primary" tabIndex={isOpened ? 0 : -1} onClick={() => clearErrors()}>
             Send
           </Button>
           <span className={styles.info}>* Will be moderated and reviewed before being published.</span>
         </div>
       </div>
       {isSuccess && (
-        <div className={cn(styles.success, styles.panel)}>
+        <div role="alert" className={cn(styles.success, styles.panel)}>
           <div className={styles.successTitle}>Review is sent</div>
           <div>Thank you! Your review will be published after moderation.</div>
-          <CloseIcon className={styles.close} onClick={() => setSuccess(false)} />
+          <button className={styles.close} onClick={() => setSuccess(false)} aria-label="Close popup">
+            <CloseIcon />
+          </button>
         </div>
       )}
       {errorMessage && (
-        <div className={cn(styles.error, styles.panel)}>
+        <div role="alert" className={cn(styles.error, styles.panel)}>
           {errorMessage}
-          <CloseIcon className={styles.close} onClick={() => setErrorMessage('')} />
+          <button className={styles.close} onClick={() => setErrorMessage('')} aria-label="Close popup">
+            <CloseIcon />
+          </button>
         </div>
       )}
     </form>
