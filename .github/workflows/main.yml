@@ -6,6 +6,9 @@ on:
   push:
     branches: [ main ]
 
+env:
+  NEXT_PUBLIC_DOMAIN: ${{ secrets.NEXT_PUBLIC_DOMAIN }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
