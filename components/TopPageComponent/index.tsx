@@ -6,6 +6,7 @@ import { ProductModel } from '../../interfaces/product.interface';
 import { HTag, Tag, HeadHuntData, Advantages, Sort, Product } from '..';
 import { SortEnum } from '../Sort';
 import { SortReducer } from './sort.reducer';
+import { useReducedMotion } from 'framer-motion';
 
 interface TopPageProps extends Record<string, unknown> {
   page: PageModel;
@@ -18,6 +19,8 @@ const TopPageComponent = ({ page, products, firstCategory }: TopPageProps): JSX.
     products,
     sort: SortEnum.Rating,
   });
+
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     dispatchSort({ type: 'reset', initialState: products });
@@ -40,7 +43,9 @@ const TopPageComponent = ({ page, products, firstCategory }: TopPageProps): JSX.
       </div>
       <div role="list">
         {sortedProducts &&
-          sortedProducts.map((product) => <Product key={product._id} layout product={product} role="listitem" />)}
+          sortedProducts.map((product) => (
+            <Product key={product._id} layout={!shouldReduceMotion} product={product} role="listitem" />
+          ))}
       </div>
       <div className={styles.hhTitle}>
         <HTag tag="h2">Vacancies - {page?.category}</HTag>

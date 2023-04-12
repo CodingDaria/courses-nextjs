@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import cn from 'classnames';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 import styles from './Header.module.css';
 import Logo from '../logo.svg';
@@ -13,6 +13,7 @@ interface IHeaderProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>,
 export const Header = ({ className, ...props }: IHeaderProps) => {
   const [isOpened, setOpened] = useState(false);
   const router = useRouter();
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     setOpened(false);
@@ -27,7 +28,7 @@ export const Header = ({ className, ...props }: IHeaderProps) => {
       },
     },
     closed: {
-      opacity: 0,
+      opacity: shouldReduceMotion ? 1 : 0,
       x: '100%',
     },
   };

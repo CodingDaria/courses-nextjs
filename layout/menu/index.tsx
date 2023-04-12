@@ -2,7 +2,7 @@ import { KeyboardEvent, useContext, useState } from 'react';
 import cn from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 import { firstLevelMenu } from '../../helpers';
 import { AppContext } from '../../context/app.context';
@@ -13,21 +13,24 @@ const Menu = () => {
   const { menu, setMenu, firstCategory } = useContext(AppContext);
   const [announce, setAnnounce] = useState<'closed' | 'expanded' | undefined>();
   const router = useRouter();
+  const shouldReduceMotion = useReducedMotion();
 
   const variants = {
     visible: {
       marginBottom: '20px',
-      transition: {
-        when: 'beforeChildren',
-        staggerChildren: 0.1,
-      },
+      transition: shouldReduceMotion
+        ? {}
+        : {
+            when: 'beforeChildren',
+            staggerChildren: 0.1,
+          },
     },
     hidden: { marginBottom: 0 },
   };
 
   const variantsChildren = {
     visible: { opacity: 1, height: 'auto' },
-    hidden: { opacity: 0, height: 0 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, height: 0 },
   };
 
   const openSecondLevel = (secondCategory: string) => {

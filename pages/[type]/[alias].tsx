@@ -10,9 +10,14 @@ import { PageModel, TopLevelCategory } from '../../interfaces/page.interface';
 import { ProductModel } from '../../interfaces/product.interface';
 import { firstLevelMenu } from '../../helpers';
 import { API } from '../../helpers/api';
+import { Error404 } from '../404';
 
 function Course({ page, products, menu, firstCategory }: CourseProps): JSX.Element {
-  return page && products ? (
+  if (!page || !products) {
+    return <Error404 />;
+  }
+
+  return (
     <>
       <Head>
         <title>{page.metaTitle}</title>
@@ -23,8 +28,6 @@ function Course({ page, products, menu, firstCategory }: CourseProps): JSX.Eleme
       </Head>
       <TopPageComponent page={page} products={products} menu={menu} firstCategory={firstCategory} />
     </>
-  ) : (
-    <></>
   );
 }
 
