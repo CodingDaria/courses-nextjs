@@ -16,7 +16,7 @@ export default withLayout(Courses);
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: firstLevelMenu.map((item) => `/${item.route}`),
-    fallback: true,
+    fallback: false,
   };
 };
 
