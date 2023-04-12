@@ -24,7 +24,7 @@ const Layout = ({ children }: ILayoutProps) => {
 
   return (
     <div className={styles.wrapper}>
-      <a href="" className={styles.skipLink} tabIndex={1} onKeyDown={skipAction}>
+      <a href="" className={styles.skipLink} tabIndex={0} onKeyDown={skipAction}>
         Go to content
       </a>
       <Header className={styles.header} />

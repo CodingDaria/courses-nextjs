@@ -37,7 +37,7 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
         setErrorMessage('Something went wrong');
       }
     } catch (err) {
-      setErrorMessage(err.message);
+      setErrorMessage((err as { message: string })?.message || '');
     }
   };
 
@@ -49,7 +49,7 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
           error={errors.name}
           placeholder="Name"
           tabIndex={isOpened ? 0 : -1}
-          aria-invalid={errors.name}
+          aria-invalid={errors.name as undefined}
         />
         <Input
           {...register('title', { required: { value: true, message: 'Enter the title' } })}
@@ -57,7 +57,7 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
           placeholder="Review title"
           className={styles.title}
           tabIndex={isOpened ? 0 : -1}
-          aria-invalid={errors.title}
+          aria-invalid={errors.title as undefined}
         />
         <div className={styles.rating}>
           <span>Rate:</span>
@@ -84,7 +84,7 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
           className={styles.description}
           tabIndex={isOpened ? 0 : -1}
           aria-label="Review text"
-          aria-invalid={errors.description}
+          aria-invalid={errors.description as undefined}
         />
         <div className={styles.submit}>
           <Button appearance="primary" tabIndex={isOpened ? 0 : -1} onClick={() => clearErrors()}>

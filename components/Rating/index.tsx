@@ -80,7 +80,7 @@ export const Rating = forwardRef(
           return (
             <StarIcon
               key={index}
-              ref={(r) => (ratingArrayRef.current?.[index] = r)}
+              ref={(r) => ratingArrayRef.current && (ratingArrayRef.current[index] = r)}
               className={cn(styles.star, {
                 [styles.filled]: index < currentHoverRating,
                 [styles.editable]: isEditable,
@@ -94,7 +94,7 @@ export const Rating = forwardRef(
               aria-valuemax={5}
               aria-valuemin={1}
               aria-label={isEditable ? 'Indicate rating' : `rating is ${rating}`}
-              aria-invalid={error}
+              aria-invalid={error as undefined}
             />
           );
         })}

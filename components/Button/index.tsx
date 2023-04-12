@@ -5,7 +5,11 @@ import { motion } from 'framer-motion';
 import styles from './Button.module.css';
 import ArrowIcon from './ArrowIcon.svg';
 
-interface IButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+interface IButtonProps
+  extends Omit<
+    DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
+    'onAnimationStart' | 'onDragStart' | 'onDragEnd' | 'onDrag' | 'ref'
+  > {
   children: ReactNode;
   appearance: 'primary' | 'ghost';
   arrow?: 'right' | 'down' | 'none';
